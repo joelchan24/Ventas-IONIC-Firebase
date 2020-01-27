@@ -1,0 +1,127 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title [color]="Tcolor">
+      Agregar Producto
+    </ion-title>
+   
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+<ion-item>
+  <ion-label [color]="Tcolor" position="floating">Nombre :</ion-label>
+  <!--Binding ngmodel su funcion es asignar valor a la variable desde el input -->
+  <ion-input [(ngModel)]="nombre" ></ion-input>
+</ion-item>
+
+<!--Textarea deja un espacio mayor que input para escribir -->
+<ion-item>
+  <!--Binding de propiedades se identifica por el simbolo [propiedad] = nombre de variable -->
+  <ion-label [color]="Tcolor" position="floating">Descripción :</ion-label>
+  <ion-textarea [(ngModel)]="descripcion"></ion-textarea>
+</ion-item>
+<!--Selector de categorias https://ionicframework.com/docs/api/select -->
+<ion-item>
+  <ion-label>{{cat}}</ion-label>
+  <!--Binding de evento se ideitifica por llamar a una funcion, no a una variable-->
+  <ion-select (ionChange)="evento($event)"  placeholder="">
+    <ion-select-option value="T">Tecnología</ion-select-option>
+    <ion-select-option value="H">Hogar</ion-select-option>
+    <ion-select-option value="I">Inmobiliaria</ion-select-option>
+    <ion-select-option value="M">Motor</ion-select-option>
+  </ion-select>
+</ion-item>
+<ion-card>
+  <ion-card-header>
+    <!--Binding por interpolacion de la variable "categoria" .se identifica por {{ al principio y al final del nombre de la variblae}}-->
+    <ion-card-subtitle>{{categoria}}</ion-card-subtitle>
+    <ion-card-title></ion-card-title>
+  </ion-card-header>
+<!--ngif es condicion sobre que formulario aparece-->
+  <ion-card-content *ngIf="showV=='M'">
+      <ion-item>
+          <ion-label>Motor</ion-label>
+          <ion-select placeholder="" [(ngModel)]="tipoM">
+            <ion-select-option value="Coche">Coche</ion-select-option>
+            <ion-select-option value="Moto">Moto</ion-select-option>
+          
+          </ion-select>
+        </ion-item>
+<ion-item>
+   
+  <ion-label position="floating">KM :</ion-label>
+  <ion-input type="number" [(ngModel)]="km"></ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label position="floating">Año :</ion-label>
+  <ion-input type="number" [(ngModel)]="anio"></ion-input>
+</ion-item>
+  </ion-card-content>
+  <ion-card-content *ngIf="showV=='I'">
+     
+      <ion-item>
+         
+        <ion-label position="floating">M2 de Vivienda  :</ion-label>
+        <ion-input [(ngModel)]="m2V" ></ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label position="floating">Número de Habitaciones :</ion-label>
+        <ion-input type="number" [(ngModel)]="numhabitaciones" ></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label position="floating">Número de Baños :</ion-label>
+          <ion-input [(ngModel)]="numbanios" ></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Localidad :</ion-label>
+            <ion-input [(ngModel)]="localidad"></ion-input>
+          </ion-item>
+   </ion-card-content>
+   <ion-card-content *ngIf="showV=='T'">
+      <ion-item>
+          <ion-label>Estado de Producto</ion-label>
+          <ion-select placeholder="" [(ngModel)]="Estado">
+            <ion-select-option value="P">Perfecto Estado</ion-select-option>
+            <ion-select-option value="U">Usuado</ion-select-option>
+          
+          </ion-select>
+        </ion-item>
+
+  </ion-card-content>
+      
+</ion-card>
+<!--Input de precio-->
+<ion-item>
+  <ion-label [color]="Tcolor"  position="floating">Precio :</ion-label>
+  <ion-textarea [(ngModel)]="precio"></ion-textarea>
+</ion-item>
+<ion-button expand="block" fill="outline" (click)="this.GuardarArticulo()" >Guardar</ion-button>
+<!-- List of Text Items -->
+<!--ngFor es un bucle que sirve para recorrer datos de Array -->
+<ion-list *ngFor="let item of articulos">
+  
+  <ion-card>
+   
+    <ion-card-header>
+     
+   <!--  Codigo de la imagen que tiene la listad de articulos  -->
+         <img height="300px"  src="{{item.imagen}}">
+    
+      <ion-card-subtitle>{{item.categoria}}</ion-card-subtitle>
+      <ion-card-title>{{item.nombre}}</ion-card-title>
+    </ion-card-header>
+    
+    <ion-card-content>
+           {{item.descripcion}}
+      <ion-button expand="block" [routerLink]="['/detalles',item.id]" >Detalle</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-list>
+</ion-content>

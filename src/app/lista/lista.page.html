@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- boton de retroceso agregado en el header copiado de https://ionicframework.com/docs/api/back-button -->
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>lista</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngFor="let item of articulos">
+  
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>{{item.categoria}}</ion-card-subtitle>
+        <ion-card-title>{{item.nombre}}</ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content>
+        {{item.descripcion}}
+        <ion-button expand="block" [routerLink]="['/detalles',item.id]" >Detalle</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>

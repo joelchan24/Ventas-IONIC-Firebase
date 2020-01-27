@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>misproductos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!--Selector de categorias https://ionicframework.com/docs/api/select -->
+<ion-item>
+  <ion-label>Filtrado</ion-label>
+  <!--Binding de evento se ideitifica por llamar a una funcion, no a una variable-->
+  <ion-select   (ionChange)="evento($event)"  placeholder="">
+    <ion-select-option value="Tecnología">Tecnología</ion-select-option>
+    <ion-select-option value="H">Hogar</ion-select-option>
+    <ion-select-option value="Inmobiliaria">Inmobiliaria</ion-select-option>
+    <ion-select-option value="Motor">Motor</ion-select-option>
+  </ion-select>
+</ion-item>
+<ion-button color="success" expand="block" (click) = "onCancel()" >Todos</ion-button>
+  <ion-list *ngFor="let item of articulos">
+  
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>{{item.categoria}}</ion-card-subtitle>
+        <ion-card-title>{{item.nombre}}</ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content>
+        {{item.descripcion}}
+        <ion-button expand="block" [routerLink]="['/actualizar',item.id]" >Modificar</ion-button>
+        <ion-button color="danger" expand="block" (click) = "Eliminar(item.id)" >Eliminar</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>
